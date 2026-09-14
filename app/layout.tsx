@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "GolData — Estadísticas del fútbol argentino",
   description: "Tablas de posiciones y resultados actualizados del fútbol del ascenso argentino, empezando por el Torneo Federal A.",
+  verification: {
+    google: "3gbqQGbbDJBhhWpXV3H7F20YfRj69FYVxn9ptL_Xw1g",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
