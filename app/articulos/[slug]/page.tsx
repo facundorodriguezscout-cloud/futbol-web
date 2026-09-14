@@ -1,6 +1,23 @@
 import { supabase } from '@/lib/supabaseClient';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const { data: articulo } = await supabase
+    .from('articulos')
+    .select('titulo, contenido')
+    .eq('slug', slug)
+    .single();
+
+  if (!articulo) return {};
+
+  return {
+    title: `${articulo.titulo} — GolData`,
+    description: articulo.contenido.slice(0, 155) + '...',
+  };
+}
 
 export default async function Articulo({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
